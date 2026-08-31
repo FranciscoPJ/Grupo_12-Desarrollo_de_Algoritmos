@@ -38,7 +38,7 @@ public class ejercicio_f1yf2_grupo12 {
      * 
      * @return VACIO
      */
-    public static void menu() {
+    public static void menu(char[] arrEstados) {
         boolean salir = false;
         // Carga el arreglo de cocheras
         // char[] arrEstados = cargarArregloEstadoCocheras();
@@ -108,12 +108,13 @@ public class ejercicio_f1yf2_grupo12 {
 
     public static void main(String[] args) {
         char[] estacionamiento = cargarArregloEstacionamiento();
-        menu();
+        menu(estacionamiento);
     }
-        public static void mostrarArregloEstadoCocheras(char [] finalEstacionamiento){
+
+    public static void mostrarArregloEstadoCocheras(char[] finalEstacionamiento) {
         int i;
         System.out.print("Cocheras: ");
-        for (i = 0; i < finalEstacionamiento.length; i++){
+        for (i = 0; i < finalEstacionamiento.length; i++) {
             System.out.print(" [" + finalEstacionamiento[i] + "] ");
         }
     }
