@@ -85,7 +85,8 @@ public class ejercicio_f1yf2_grupo12 {
                         break;
                     case 4:
                         System.out.println("\nEstado del estacionamiento:\n");
-                        // mostrarArregloEstadoCocheras(arrEstados);
+                        mostrarArregloEstadoCocheras(arrEstados);
+                        System.out.println();
                         break;
                     case 5:
                         salir = true;
@@ -108,5 +109,12 @@ public class ejercicio_f1yf2_grupo12 {
     public static void main(String[] args) {
         char[] estacionamiento = cargarArregloEstacionamiento();
         menu();
+    }
+        public static void mostrarArregloEstadoCocheras(char [] finalEstacionamiento){
+        int i;
+        System.out.print("Cocheras: ");
+        for (i = 0; i < finalEstacionamiento.length; i++){
+            System.out.print(" [" + finalEstacionamiento[i] + "] ");
+        }
     }
 }
