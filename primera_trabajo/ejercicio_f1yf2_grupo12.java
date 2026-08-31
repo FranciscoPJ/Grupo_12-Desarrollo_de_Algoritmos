@@ -1,5 +1,7 @@
 package tp_grupal.primera_trabajo;
 
+import utiles.TecladoIn;
+
 import java.util.Scanner;
 
 public class ejercicio_f1yf2_grupo12 {
@@ -86,6 +88,41 @@ public class ejercicio_f1yf2_grupo12 {
         return indice;
     }
 
+    public static void ocuparLugar(char[] arr) {
+        int lugar_a_ocupar = 0;
+        int contadorLugaresDisponibles = buscarLugaresLibres(arr); // <-----  [ Usar el modulo creado por juan. ]
+        if (contadorLugaresDisponibles != 0) {
+            boolean lugarOcupado = false;
+            System.out.println("\nLos siguientes lugares estan disponibles: ");
+            for (int i = 0; i < arr.length; i++) { //Repasa todo el arreglo
+                if (arr[i] == 'L') {
+                    System.out.println("Lugar: " + (i + 1)); // imprime los lugares en donde hay lugares disponibles.
+                }
+            }
+            do {
+                System.out.println("\nIngrese el lugar que desea ocupar ");
+                lugar_a_ocupar = TecladoIn.readInt();
+                lugar_a_ocupar--; // le resto uno para que el usuario no ponga entre 0 y arr.lenght, pues se busca que la posicion 0 la pongan como 1
+
+                if (lugar_a_ocupar >= 0 && lugar_a_ocupar <= arr.length) { //Nos aseguramos de que el numero de lugar este en el rango del arreglo.
+                    if (arr[lugar_a_ocupar] == 'O') { //Busca segun el indice puesto cual lugar esta disponible.
+                        System.out.println("El lugar ya se encuentra ocupado, por favor ingrese otro numero del listado disponible");
+                        lugarOcupado = false;
+                    } else if (arr[lugar_a_ocupar] == 'L') {
+                        arr[lugar_a_ocupar] = 'O'; // Cambia a O el lugar desocupado.
+                        lugarOcupado = true; // Cambia a true para cerrar el bucle
+
+                    }
+                } else {
+                    System.out.println("Ingrese un numero valido");
+                    lugarOcupado = false; // flag para repetir el bucle
+                }
+            } while (!lugarOcupado);
+        } else {
+            System.out.println("No hay cocheras disponibles..");
+        }
+    }
+
     /**
      * Menu)
      * Modulo que muestra el menú principal del programa y permite al usuario
@@ -149,6 +186,8 @@ public class ejercicio_f1yf2_grupo12 {
                     case 4:
                         System.out.println("\nEstado del estacionamiento:\n");
                         mostrarArregloEstadoCocheras(arrEstados);
+                        ocuparLugar(arrEstados); // <----- Agregar al principio el modulo que muestra la cantidad de lugares disponibles
+
                         System.out.println();
                         break;
                     case 5:
