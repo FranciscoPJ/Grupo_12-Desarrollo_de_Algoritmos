@@ -32,19 +32,36 @@ public class ejercicio_f1yf2_grupo12 {
     }
 
     /**
+     * Modulo que busca la primer cochera libre, -1 en caso de no encontrarla
+     * 
+     * @param arr
+     * @return int
+     */
+    public static int primerCocheraLibre(char[] arr) {
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] == 'L') {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    /**
      * Modulo que busca y devuelve el indice del
      * primer lugar libre que tenga N lugares consecutivos libres.
      * 
      * @param arr char[]
-     * @param n INT
+     * @param n   INT
      * @return INT
      */
     public static int buscarIndiceDeLugaresConsecutivos(char[] arr, int n) {
         int cantLugaresConsecutivos = 0; // cuenta la cantidad de lugares consecutivos libres
-        int indice = -1;                 // inicializa el indice en -1 para indicar que no se encontraron N lugares consecutivos libres
-        int indiceInicio = 0;            // obtiene el indice del primer lugar libre que tenga N lugares consecutivos libres
-        int longitud = arr.length;       // obtiene la longitud del arreglo
-        int i = 0;                       // inicializa el indice para recorrer el arreglo
+        int indice = -1; // inicializa el indice en -1 para indicar que no se encontraron N lugares
+                         // consecutivos libres
+        int indiceInicio = 0; // obtiene el indice del primer lugar libre que tenga N lugares consecutivos
+                              // libres
+        int longitud = arr.length; // obtiene la longitud del arreglo
+        int i = 0; // inicializa el indice para recorrer el arreglo
 
         while (i < longitud && cantLugaresConsecutivos < n) {
             if (arr[i] == 'L') {
@@ -54,7 +71,8 @@ public class ejercicio_f1yf2_grupo12 {
                 }
 
                 if (cantLugaresConsecutivos == n) {
-                    indice = indiceInicio; // guarda el indice del primer lugar libre que tenga N lugares consecutivos libres
+                    indice = indiceInicio; // guarda el indice del primer lugar libre que tenga N lugares consecutivos
+                                           // libres
                 }
 
             } else {
@@ -63,7 +81,8 @@ public class ejercicio_f1yf2_grupo12 {
             // incrementa el indice para continuar con la busqueda
             i++;
         }
-        // retorna el indice del primer lugar libre que tenga N lugares consecutivos libres, o -1 si no se encontraron
+        // retorna el indice del primer lugar libre que tenga N lugares consecutivos
+        // libres, o -1 si no se encontraron
         return indice;
     }
 
@@ -99,6 +118,13 @@ public class ejercicio_f1yf2_grupo12 {
                         // contarCocherasLibres(arrEstados)+"\n");
                         break;
                     case 2:
+                        int primerCocheraLibre = primerCocheraLibre(arrEstados);
+                        if (primerCocheraLibre != -1) {
+                            System.out.println(
+                                    "La primer cochera libre se encuentra en el indice: " + (primerCocheraLibre + 1));
+                        } else {
+                            System.out.println("No hay cocheras libres.");
+                        }
                         /*
                          * int indicePrimeraCocheraLibre = buscarPrimeraCocheraLibre(arrEstados);
                          * if (indicePrimeraCocheraLibre != -1) {
@@ -130,10 +156,10 @@ public class ejercicio_f1yf2_grupo12 {
                         int n = sc.nextInt();
                         // mostrarArregloEstadoCocheras(char[] arr, int indiceN, int cantidadN)
                         int indice = buscarIndiceDeLugaresConsecutivos(arrEstados, n);
-                        
+
                         if (indice != -1) {
-                            System.out.println("\nSe encontraron " + n 
-                                + " lugares consecutivos libres a partir del índice: " + (indice + 1));
+                            System.out.println("\nSe encontraron " + n
+                                    + " lugares consecutivos libres a partir del índice: " + (indice + 1));
                         } else {
                             System.out.println("\nNo se encontraron " + n + " lugares consecutivos libres.");
                         }
