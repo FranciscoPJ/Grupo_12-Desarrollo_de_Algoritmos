@@ -1,7 +1,5 @@
 package tp_grupal.primera_trabajo;
 
-import utiles.TecladoIn;
-
 import java.util.Scanner;
 
 public class ejercicio_f1yf2_grupo12 {
@@ -48,22 +46,41 @@ public class ejercicio_f1yf2_grupo12 {
         return -1;
     }
 
+    public static void mostrarArregloEstadoCocheras(char[] finalEstacionamiento) {
+        int i;
+        System.out.print("Cocheras: ");
+        for (i = 0; i < finalEstacionamiento.length; i++) {
+            System.out.print(" [" + finalEstacionamiento[i] + "] ");
+        }
+    }
+
+    public static int contarCocherasLibres(char[] arrLibre) {  // Modulo que se encarga de contar las cocheras libres
+        int contador = 0;   // contador guarda la cantidad de cocheras libres, se inicia en 0
+
+        for (int i = 0; i < arrLibre.length; i++) {
+        if (arrLibre[i] == 'L') {
+            contador++;
+        } /* mientras la posición en la que se encuentra la variable i en el arreglo sea una L,
+          significa que la cochera está libre y el contador de cocheras libres suma 1 */
+    }
+
+        return contador; // Cuando termine el for, se retornará el valor de la variable contador
+    }
+
     /**
      * Modulo que busca y devuelve el indice del
      * primer lugar libre que tenga N lugares consecutivos libres.
      * 
      * @param arr char[]
-     * @param n   INT
+     * @param n INT
      * @return INT
      */
     public static int buscarIndiceDeLugaresConsecutivos(char[] arr, int n) {
         int cantLugaresConsecutivos = 0; // cuenta la cantidad de lugares consecutivos libres
-        int indice = -1; // inicializa el indice en -1 para indicar que no se encontraron N lugares
-                         // consecutivos libres
-        int indiceInicio = 0; // obtiene el indice del primer lugar libre que tenga N lugares consecutivos
-                              // libres
-        int longitud = arr.length; // obtiene la longitud del arreglo
-        int i = 0; // inicializa el indice para recorrer el arreglo
+        int indice = -1;                 // inicializa el indice en -1 para indicar que no se encontraron N lugares consecutivos libres
+        int indiceInicio = 0;            // obtiene el indice del primer lugar libre que tenga N lugares consecutivos libres
+        int longitud = arr.length;       // obtiene la longitud del arreglo
+        int i = 0;                       // inicializa el indice para recorrer el arreglo
 
         while (i < longitud && cantLugaresConsecutivos < n) {
             if (arr[i] == 'L') {
@@ -73,24 +90,22 @@ public class ejercicio_f1yf2_grupo12 {
                 }
 
                 if (cantLugaresConsecutivos == n) {
-                    indice = indiceInicio; // guarda el indice del primer lugar libre que tenga N lugares consecutivos
-                                           // libres
+                    indice = indiceInicio; // guarda el indice del primer lugar libre que tenga N lugares consecutivos libres
                 }
 
             } else {
                 cantLugaresConsecutivos = 0; // reinicia la cuenta si encuentra un lugar ocupado
             }
-            // incrementa el indice para continuar con la busqueda
-            i++;
+                        
+            i++; // incrementa el indice para continuar con la busqueda
         }
-        // retorna el indice del primer lugar libre que tenga N lugares consecutivos
-        // libres, o -1 si no se encontraron
+        // retorna el indice del primer lugar libre que tenga N lugares consecutivos libres, o -1 si no se encontraron
         return indice;
     }
 
     public static void ocuparLugar(char[] arr) {
         int lugar_a_ocupar = 0;
-        int contadorLugaresDisponibles = buscarLugaresLibres(arr); // <-----  [ Usar el modulo creado por juan. ]
+        int contadorLugaresDisponibles = primerCocheraLibre(arr); // <-----  [ Usar el modulo creado por juan. ]
         if (contadorLugaresDisponibles != 0) {
             boolean lugarOcupado = false;
             System.out.println("\nLos siguientes lugares estan disponibles: ");
@@ -101,7 +116,7 @@ public class ejercicio_f1yf2_grupo12 {
             }
             do {
                 System.out.println("\nIngrese el lugar que desea ocupar ");
-                lugar_a_ocupar = TecladoIn.readInt();
+                lugar_a_ocupar = sc.nextInt();
                 lugar_a_ocupar--; // le resto uno para que el usuario no ponga entre 0 y arr.lenght, pues se busca que la posicion 0 la pongan como 1
 
                 if (lugar_a_ocupar >= 0 && lugar_a_ocupar <= arr.length) { //Nos aseguramos de que el numero de lugar este en el rango del arreglo.
@@ -132,9 +147,7 @@ public class ejercicio_f1yf2_grupo12 {
      */
     public static void menu(char[] arrEstados) {
         boolean salir = false;
-        // Carga el arreglo de cocheras
-        // char[] arrEstados = cargarArregloEstadoCocheras();
-
+        
         do {
             System.out.println("\nSeleccione una opcion:");
             System.out.println("1: Mostrar cantidad de cocheras libres");
@@ -161,39 +174,20 @@ public class ejercicio_f1yf2_grupo12 {
                                     "La primer cochera libre se encuentra en el indice: " + (primerCocheraLibre + 1));
                         } else {
                             System.out.println("No hay cocheras libres.");
-                        }
-                        /*
-                         * int indicePrimeraCocheraLibre = buscarPrimeraCocheraLibre(arrEstados);
-                         * if (indicePrimeraCocheraLibre != -1) {
-                         * System.out.println("\nLa primera cochera libre se encuentra en el índice: "
-                         * + indicePrimeraCocheraLibre + "\n");
-                         * } else {
-                         * System.out.println("\nNo hay cocheras libres.\n");
-                         * }
-                         */
+                        }                       
                         break;
-                    case 3:
-                        // System.out.println("\nIngrese un índice desde 1 al " + arrEstados.length
-                        // + " para solicitar una cochera libre:");
-                        if (sc.hasNextInt()) {
-                            int indice = sc.nextInt();
-                            // solicitarCocheraLibre(arrEstados, indice);
-                        } else {
-                            System.out.println("\nEntrada no válida. Por favor, ingrese un número entero.");
-                            sc.next(); // Limpiar la entrada inválida
-                        }
+                    case 3:                        
+                        ocuparLugar(arrEstados); // <----- Agregar al principio el modulo que muestra la cantidad de lugares disponibles                      
                         break;
                     case 4:
                         System.out.println("\nEstado del estacionamiento:\n");
                         mostrarArregloEstadoCocheras(arrEstados);
-                        ocuparLugar(arrEstados); // <----- Agregar al principio el modulo que muestra la cantidad de lugares disponibles
 
                         System.out.println();
                         break;
                     case 5:
                         System.out.println("\nIngrese la cantidad N de lugares consecutivos que desea buscar:\n");
                         int n = sc.nextInt();
-                        // mostrarArregloEstadoCocheras(char[] arr, int indiceN, int cantidadN)
                         int indice = buscarIndiceDeLugaresConsecutivos(arrEstados, n);
 
                         if (indice != -1) {
@@ -222,28 +216,9 @@ public class ejercicio_f1yf2_grupo12 {
     }
 
     public static void main(String[] args) {
+        // Carga el arreglo de cocheras
         char[] estacionamiento = cargarArregloEstacionamiento();
         menu(estacionamiento);
     }
 
-    public static void mostrarArregloEstadoCocheras(char[] finalEstacionamiento) {
-        int i;
-        System.out.print("Cocheras: ");
-        for (i = 0; i < finalEstacionamiento.length; i++) {
-            System.out.print(" [" + finalEstacionamiento[i] + "] ");
-        }
-    }
-
-    public static int contarCocherasLibres(char[] arrLibre) {  // Modulo que se encarga de contar las cocheras libres
-        int contador = 0;   // contador guarda la cantidad de cocheras libres, se inicia en 0
-
-        for (int i = 0; i < arrLibre.length; i++) {
-        if (arrLibre[i] == 'L') {
-            contador++;
-        } /* mientras la posición en la que se encuentra la variable i en el arreglo sea una L,
-          significa que la cochera está libre y el contador de cocheras libres suma 1 */
-    }
-
-        return contador; // Cuando termine el for, se retornará el valor de la variable contador
-    }
 }
