@@ -234,11 +234,11 @@ public class ejercicio_f1yf2_grupo12 {
         }
     }
 
-    public static int contarCocherasLibres(char[] arr) {  // Modulo que se encarga de contar las cocheras libres
+    public static int contarCocherasLibres(char[] arrLibre) {  // Modulo que se encarga de contar las cocheras libres
         int contador = 0;   // contador guarda la cantidad de cocheras libres, se inicia en 0
 
-        for (int i = 0; i < arr.length; i++) {
-        if (arr[i] == 'L') {
+        for (int i = 0; i < arrLibre.length; i++) {
+        if (arrLibre[i] == 'L') {
             contador++;
         } /* mientras la posición en la que se encuentra la variable i en el arreglo sea una L,
           significa que la cochera está libre y el contador de cocheras libres suma 1 */
