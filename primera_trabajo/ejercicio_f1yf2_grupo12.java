@@ -114,8 +114,8 @@ public class ejercicio_f1yf2_grupo12 {
 
                 switch (opcion) {
                     case 1:
-                        // System.out.println("\nCantidad de cocheras libres: " +
-                        // contarCocherasLibres(arrEstados)+"\n");
+                         System.out.println("\nCantidad de cocheras libres: " +
+                         contarCocherasLibres(arrEstados)+"\n");
                         break;
                     case 2:
                         int primerCocheraLibre = primerCocheraLibre(arrEstados);
@@ -193,5 +193,18 @@ public class ejercicio_f1yf2_grupo12 {
         for (i = 0; i < finalEstacionamiento.length; i++) {
             System.out.print(" [" + finalEstacionamiento[i] + "] ");
         }
+    }
+
+    public static int contarCocherasLibres(char[] arr) {  // Modulo que se encarga de contar las cocheras libres
+        int contador = 0;   // contador guarda la cantidad de cocheras libres, se inicia en 0
+
+        for (int i = 0; i < arr.length; i++) {
+        if (arr[i] == 'L') {
+            contador++;
+        } /* mientras la posición en la que se encuentra la variable i en el arreglo sea una L,
+          significa que la cochera está libre y el contador de cocheras libres suma 1 */
+    }
+
+        return contador; // Cuando termine el for, se retornará el valor de la variable contador
     }
 }
