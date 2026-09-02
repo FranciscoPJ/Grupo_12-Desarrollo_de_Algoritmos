@@ -105,7 +105,7 @@ public class ejercicio_f1yf2_grupo12 {
 
     public static void ocuparLugar(char[] arr) {
         int lugar_a_ocupar = 0;
-        int contadorLugaresDisponibles = primerCocheraLibre(arr); // <-----  [ Usar el modulo creado por juan. ]
+        int contadorLugaresDisponibles = contarCocherasLibres(arr); // <-----  [ Usar el modulo creado por juan. ]
         if (contadorLugaresDisponibles != 0) {
             boolean lugarOcupado = false;
             System.out.println("\nLos siguientes lugares estan disponibles: ");
